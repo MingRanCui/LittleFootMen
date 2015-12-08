@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
+#import "FirstViewController.h"
+#import "FMBuildViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +19,27 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    NSString *sandboxPath = [NSHomeDirectory() stringByAppendingString:@"/Documents/LFM.plist"];
+    NSDictionary *notFirstStartDic = [[NSDictionary alloc] initWithContentsOfFile:sandboxPath];
+    BOOL isNotFirstStart = [[notFirstStartDic objectForKey:@"isNotFirstStart"] boolValue];
+    if (isNotFirstStart) {
+//        ViewController *mainTabBarController = [[ViewController alloc] init];
+        FMBuildViewController *mainTabBarController = [[FMBuildViewController alloc] init];
+        UINavigationController *mainNavi = [[UINavigationController alloc] initWithRootViewController:mainTabBarController];
+        self.window.rootViewController = mainNavi;
+    } else {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:@YES forKey:@"isNotFirstStart"];
+        [dic writeToFile:sandboxPath atomically:YES];
+        
+        FirstViewController *firstVC = [[FirstViewController alloc] init];
+        self.window.rootViewController = firstVC;
+    }
+    
+    // 输出 沙盒路径
+//    NSString *path = NSHomeDirectory();
+//    NSLog(@"%@",path);
+    
     return YES;
 }
 

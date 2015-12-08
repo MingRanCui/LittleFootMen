@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  FirstViewController.h
 //  LittleFootMen
 //
-//  Created by 崔明燃 on 15/11/6.
+//  Created by 崔明燃 on 15/11/7.
 //  Copyright © 2015年 崔明燃. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface FirstViewController : UIViewController
 
 @end
-
